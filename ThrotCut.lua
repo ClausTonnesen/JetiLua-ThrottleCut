@@ -36,9 +36,18 @@ local function initForm(subform)
 
 end
 
+local function printForm()
+	lcd.drawText(10, 120, "Throttle cut active")
+	if (cut==1) then
+	  lcd.drawImage (140,120,":okBig") 
+	else
+	  lcd.drawImage (140,120,":crossBig") 
+    end
+end
+
 -- Init function
 local function init() 
-  system.registerForm(1,MENU_ADVANCED,appName,initForm) 
+  system.registerForm(1,MENU_ADVANCED,appName,initForm,nil,printForm) 
 
   switchIn = system.pLoad("_CUT_switchIn")
   stickIn = system.pLoad("_CUT_stickIn")
@@ -73,4 +82,4 @@ local function loop()
 end
 
 
-return { init=init, loop=loop, author="ClausT on JetiForum.de", version="1.00",name=appName}
+return { init=init, loop=loop, author="ClausT on JetiForum.de", version="1.01",name=appName}
