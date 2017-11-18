@@ -38,11 +38,21 @@ end
 
 local function printForm()
 	lcd.drawText(10, 120, "Throttle cut active")
-	if (cut==1) then
-	  lcd.drawImage (140,120,":okBig") 
+	
+	if (string.find (system.getDeviceType(),"24")) then 
+	  if (cut==1) then
+	    lcd.drawImage (140,120,":okBig") 
+	  else
+	    lcd.drawImage (140,120,":crossBig") 
+      end
 	else
-	  lcd.drawImage (140,120,":crossBig") 
-    end
+	  if (cut==1) then
+        lcd.drawText(140,120,"YES", FONT_BOLD) 
+	  else
+	    lcd.drawText(140,120,"no", FONT_BOLD) 
+      end
+	end
+
 end
 
 -- Init function
@@ -82,4 +92,4 @@ local function loop()
 end
 
 
-return { init=init, loop=loop, author="ClausT on JetiForum.de", version="1.01",name=appName}
+return { init=init, loop=loop, author="ClausT on JetiForum.de", version="1.02",name=appName}
